@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const Container = () => {
@@ -9,6 +9,14 @@ const Container = () => {
       </div>
     </>
   );
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleButtonClick("experiencia");
+      mostrarExperiencia();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
   const [activeButton, setActiveButton] = useState("experiencia");
 
   const handleButtonClick = (buttonName) => {

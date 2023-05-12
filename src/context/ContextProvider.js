@@ -15,34 +15,39 @@ function ContextProvider(props) {
         <input type="password" id="password" class="swal2-input" placeholder="Contraseña">`,
       confirmButtonText: "Iniciar sesion",
       focusConfirm: false,
-      showCloseButton:true,
-      allowOutsideClick:false,
+      showCloseButton: true,
+      allowOutsideClick: false,
       preConfirm: () => {
         const login = Swal.getPopup().querySelector("#login").value;
         const password = Swal.getPopup().querySelector("#password").value;
         if (!login || !password) {
           Swal.showValidationMessage(`Please enter login and password`);
-        }else{
-
+        } else {
           return { login: login, password: password };
         }
-        
       },
     }).then((result) => {
-      if (result.value.login && result.value.password) {
-      if (result.value.login == usuario && result.value.password == contraseña) {
-        Swal.fire(`
+      console.log(result);
+      if (result.isConfirmed) {
+        if (
+          result.value.login == usuario &&
+          result.value.password == contraseña
+        ) {
+          Swal.fire(
+            `
         Bienvenido: ${result.value.login}
-        `.trim())
-        setIsLoggedIn(true);
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Error.',
-          text: 'Usuario o contraseña incorrectos',
-        })
-        setIsLoggedIn(false);
-      }}
+        `.trim()
+          );
+          setIsLoggedIn(true);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error.",
+            text: "Usuario o contraseña incorrectos",
+          });
+          setIsLoggedIn(false);
+        }
+      }
     });
   };
 
