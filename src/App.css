@@ -90,6 +90,11 @@
   height: 100px;
 
 }
+
+.w95{
+  width: 95%;
+  padding: 3%;
+}
 @media (max-width: 768px) {
   .containerPerso {
     grid-template-columns: 1fr;
