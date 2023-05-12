@@ -4,17 +4,17 @@ import DatosDeContacto from "./DatosDeContacto";
 
 const DatosPersonales = () => {
   return (
-    <div className="col col-1">
-      <div className="row">
+    <div className="colPerso col1">
+      <div className="rowPerso">
         <Perfil/>
       </div>
-      <div className="row">
+      <div className="rowPerso">
         <DatosDeContacto/>
         
       </div>
-      <div className="row">
-        <div className="col col-Boton">
-          <button className="btn">Contactar</button>
+      <div className="rowPerso">
+        <div className="colPerso col-Boton">
+          <button className="btn btn-warning text-white">Contactar</button>
         </div>
       </div>
     </div>

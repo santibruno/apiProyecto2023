@@ -13,11 +13,11 @@ function Login() {
   };
 
   return (
-    <div className='NavPers'>
+    <div className='NavPers '>
       {isLoggedIn ? (
-        <button onClick={handleLogout}>Cerrar sesión</button>
+        <button className='btn btn-danger text-white fw-bold' onClick={handleLogout}>Cerrar sesión</button>
       ) : (
-        <button onClick={handleLogin}>Iniciar sesión</button>
+        <button className='btn btn-warning text-white fw-bold' onClick={handleLogin}>Iniciar sesión</button>
       )}
     </div>
   );
