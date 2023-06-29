@@ -11,14 +11,14 @@ function App() {
         <div className="">
           <Login />
         </div>
-        <div className="containerPerso">
+        <div id="containerPerso" className="containerPerso">
           <div className="rowPerso">
             <DatosPersonales />
           </div>
-          <div class="rowPerso">
+          <div className="rowPerso">
             <Container />
           </div>
-          <div class="rowPerso">
+          <div id="interesados" className="">
             <Interesados />
           </div>
         </div>

@@ -5,7 +5,8 @@ function Login() {
   const { isLoggedIn, login, logout } = useContext(AContext);
 
   const handleLogin = () => {
-    login('usuario', 'contraseña');
+    login();
+    
   };
 
   const handleLogout = () => {

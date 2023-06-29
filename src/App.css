@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background: linear-gradient(158deg, rgba(255,255,255,1) 0%, rgba(255,251,155,1) 54%, rgba(254,255,0,1) 100%);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 1) 0%, rgba(255, 251, 155, 1) 54%, rgba(254, 255, 0, 1) 100%);
 }
 
 .App-link {
@@ -9,7 +9,7 @@
 
 .containerPerso {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   align-items: start;
 }
@@ -22,6 +22,13 @@
 }
 
 
+.rowPersoLoginOff {
+  display: grid;
+  grid-template-columns: 2fr;
+  gap: 1rem;
+  padding: 0px;
+}
+
 .colPerso {
   text-align: center;
   padding: 0px 15px;
@@ -29,6 +36,7 @@
   margin-bottom: 5px;
 
 }
+
 .colPerso2 {
   text-align: center;
   padding: 0px 0px;
@@ -45,7 +53,7 @@
 
 .col2 {
   background-color: #ffffff;
-  border-radius:0px 0px 20px 20px  ;
+  border-radius: 0px 0px 20px 20px;
 
 }
 
@@ -56,11 +64,12 @@
 
 }
 
-.iconoLink{
+.iconoLink {
   width: 30px;
   height: 30px;
 
 }
+
 .col1-1 {
 
   background-color: #ffffff;
@@ -72,29 +81,30 @@
   justify-content: space-between;
 }
 
-.NavPers{
+.NavPers {
   display: flex !important;
   justify-content: end;
   padding: 5px;
 }
 
-.datosPerso{
+.datosPerso {
   padding-top: 10px;
   padding-bottom: 20px;
   display: inline-block;
 
 }
 
-.foto{
+.foto {
   width: 100px;
   height: 100px;
 
 }
 
-.w95{
+.w95 {
   width: 95%;
   padding: 3%;
 }
+
 @media (max-width: 768px) {
   .containerPerso {
     grid-template-columns: 1fr;
@@ -103,6 +113,7 @@
   .rowPerso {
     grid-template-columns: 1fr;
   }
+
 
   .colPerso.col1 {
     grid-template-columns: 1fr;

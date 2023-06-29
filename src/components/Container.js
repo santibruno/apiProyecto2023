@@ -4,20 +4,20 @@ import Card from "./Card";
 const Container = () => {
   const [contenido, setContenido] = useState(
     <>
-      <div class="spinner-border text-danger" role="status">
+      <div class="spinner-border text-warning" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </>
   );
   useEffect(() => {
     const timer = setTimeout(() => {
-      handleButtonClick("experiencia");
-      mostrarExperiencia();
+      handleButtonClick("AcercaDeMi");
+      mostrarAcercaDeMi();
     }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
-  const [activeButton, setActiveButton] = useState("experiencia");
+  const [activeButton, setActiveButton] = useState("AcercaDeMi");
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -55,6 +55,7 @@ const Container = () => {
             "Programacion en react.js, Desarrollo de landings pages en javascript, Diseño ux/ui"
           }
         ></Card>
+        
       </div>
     );
   };
@@ -62,6 +63,8 @@ const Container = () => {
   const mostrarEducacion = () => {
     setContenido(
       <div className="m-2">
+        <div className="h5 text-start">Estudios Cursados</div>
+        <hr></hr>
         <Card
           key={"5"}
           titulo={"Secundario"}
@@ -78,6 +81,25 @@ const Container = () => {
           fecha_final={"Actualidad"}
           labores={"Ingenieria en informatica"}
         ></Card>
+        <div className="h5 text-start">Idiomas</div>
+        <hr></hr>
+
+        <div className="card w-100 d-flex align-items-start ">
+          <div class="h5 card-title pt-2 pb-2 m-2 text-start border-bottom border-warning w-75">
+            Español
+          </div>
+          <h6 class="card-subtitle mb-2 w-100 fw-bold text-start ps-2">
+            Nativo
+          </h6>
+        </div>
+        <br></br>
+        <div className="card w-100 d-flex align-items-start ">
+          <div class="h5 card-title pb-2 pt-2 m-2 text-start border-bottom border-warning w-75">
+            Ingles
+          </div>
+          <h6 class="card-subtitle mb-2 w-100 fw-bold text-start ps-2">B1</h6>
+        </div>
+
       </div>
     );
   };

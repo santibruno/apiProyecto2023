@@ -7,13 +7,13 @@ export default AContext;
 
 function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = (usuario, contraseña) => {
+  const [token,setToken] = useState("");
+  const login = () => {
     Swal.fire({
-      title: "Login Form",
+      title: "Iniciar sesion",
       html: `<input type="text" id="login" class="swal2-input" placeholder="Usuario">
         <input type="password" id="password" class="swal2-input" placeholder="Contraseña">`,
-      confirmButtonText: "Iniciar sesion",
+      confirmButtonText: "Ingresar",
       focusConfirm: false,
       showCloseButton: true,
       allowOutsideClick: false,
@@ -29,34 +29,57 @@ function ContextProvider(props) {
     }).then((result) => {
       console.log(result);
       if (result.isConfirmed) {
-        if (
-          result.value.login == usuario &&
-          result.value.password == contraseña
-        ) {
-          Swal.fire(
-            `
-        Bienvenido: ${result.value.login}
-        `.trim()
-          );
-          setIsLoggedIn(true);
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Error.",
-            text: "Usuario o contraseña incorrectos",
+        const email = result.value.login;
+        const password = result.value.password;
+        const jsonBody = `{"email": "${email}","password":"${password}"}`;
+        fetch("http://localhost:8080/api/user/login", {
+          method: "POST",
+          headers: {
+            Accept: "application.json",
+            "Content-Type": "application/json",
+          },
+          body: jsonBody,
+          cache: "default",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.estado == true) {
+              setToken(data.token)
+              {
+                Swal.fire(
+                  `
+          Bienvenido: ${result.value.login}
+          `.trim()
+                );
+                setIsLoggedIn(true);
+                document.getElementById(
+                  "containerPerso"
+                ).style.gridTemplateColumns = "repeat(3, 1fr)";
+              }
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Error.",
+                text: "Usuario o contraseña incorrectos",
+              });
+              setIsLoggedIn(false);
+              document.getElementById(
+                "containerPerso"
+              ).style.gridTemplateColumns = "repeat(2, 1fr)";
+            }
           });
-          setIsLoggedIn(false);
-        }
       }
     });
   };
 
   const logout = () => {
     setIsLoggedIn(false);
+    document.getElementById("containerPerso").style.gridTemplateColumns =
+      "repeat(2, 1fr)";
   };
 
   return (
-    <AContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AContext.Provider value={{ isLoggedIn, login, logout,token}}>
       {props.children}
     </AContext.Provider>
   );

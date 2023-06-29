@@ -1,26 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AContext from "../context/ContextProvider";
 import PersonasCards from "./personasCards";
 const Interesados = () => {
-  const { isLoggedIn } = useContext(AContext);
+  const { isLoggedIn, token } = useContext(AContext);
+
+  const [personas, setPersonas] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetch("http://localhost:8080/api/mail/getMails", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          jwt: token,
+        },
+        cache: "default",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setPersonas(data);
+        });
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
-      <div class="colPerso col3">
-        {isLoggedIn ? (
+      {isLoggedIn ? (
+        <div class="colPerso col3">
           <div>
             <div class="h5 card-title pt-2 m-2 text-start w-75">
-            Personas interesadas en ti:
+              Personas interesadas en ti:
             </div>
             <hr></hr>
-            <PersonasCards key={"p1"} nombreCompleto={"Santiago Bruno"} email={"sbruno@uade.edu.ar"} telefono={"11-31414141"}/>
-            <PersonasCards key={"p2"} nombreCompleto={"Manuel Pena"} email={"penaManuel@uade.edu.ar"} telefono={"11-11123331"}/>
-            <PersonasCards key={"p3"} nombreCompleto={"Profesor Api"} email={"prueba@uade.edu.ar"} telefono={"11-111111111"}/>
-
+            {personas.map((persona) => (
+            <PersonasCards
+              key={persona._id}
+              nombreCompleto={persona.name}
+              email={persona.email}
+              telefono={persona.nrotelefono}
+            />
+          ))}
           </div>
-        ) : (
-          <h3>Debes Iniciar sesion para ver esta vista</h3>
-        )}
-      </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
