@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AContext from "../context/ContextProvider";
 import PersonasCards from "./personasCards";
 const Interesados = () => {
-  const { isLoggedIn, token } = useContext(AContext);
+  const { isLoggedIn, token,nuevoInteresado} = useContext(AContext);
 
   const [personas, setPersonas] = useState([]);
 
@@ -23,7 +23,8 @@ const Interesados = () => {
           setPersonas(data);
         });
     }
-  }, [isLoggedIn]);
+    
+  }, [isLoggedIn,nuevoInteresado]);
 
   return (
     <>
@@ -34,14 +35,19 @@ const Interesados = () => {
               Personas interesadas en ti:
             </div>
             <hr></hr>
-            {personas.map((persona) => (
-            <PersonasCards
-              key={persona._id}
-              nombreCompleto={persona.name}
-              email={persona.email}
-              telefono={persona.nrotelefono}
-            />
-          ))}
+            <>
+            {personas.length > 0 ?(
+              personas.map((persona) => (
+                <PersonasCards
+                  key={persona._id}
+                  nombreCompleto={persona.name}
+                  email={persona.email}
+                  telefono={persona.nrotelefono}
+                />
+              ))
+            ): (<h3>No hay personas interesadas</h3>)}
+            </>
+            {}
           </div>
         </div>
       ) : (

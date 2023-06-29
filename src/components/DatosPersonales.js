@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Perfil from "./Perfil";
 import DatosDeContacto from "./DatosDeContacto";
 import Swal from "sweetalert2";
+import AContext from "../context/ContextProvider";
+
 
 const DatosPersonales = () => {
+  const {nuevoInteresadoChange} = useContext(AContext);
   return (
     <div className="colPerso col1">
       <div className="rowPerso">
@@ -42,7 +45,7 @@ const DatosPersonales = () => {
                   const Nombre = document.getElementById("nombreInput").value;
                   const tel = document.getElementById("telInput").value;
                   const mail = document.getElementById("mailInput").value;
-                  const jsonBody = `{"name": "${Nombre}","email": "${mail}","nrotelefono":"${tel}"}`
+                  const jsonBody = `{"name": "${Nombre}","email": "${mail}","telefono":"${tel}"}`;
                   fetch("http://localhost:8080/api/mail/create", {
                     method: "POST",
                     headers: {
@@ -51,6 +54,27 @@ const DatosPersonales = () => {
                     },
                     body: jsonBody,
                     cache: "default",
+                  }).then((resp) => {
+                    if (resp.status == 400) {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Error.",
+                        text: "Porfavor complete los datos solicitados correctamente",
+                      });
+                    } else if (resp.ok) {
+                      Swal.fire({
+                        icon: "success",
+                        title: "Confirmado.",
+                        text: "Gracias por contactarse! ",
+                      });
+                      nuevoInteresadoChange();
+                    } else {
+                      Swal.fire({
+                        icon: "Error",
+                        title: "Error.",
+                        text: "Error ",
+                      });
+                    }
                   });
                 }
               });

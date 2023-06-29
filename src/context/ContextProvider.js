@@ -8,6 +8,7 @@ export default AContext;
 function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token,setToken] = useState("");
+  const [nuevoInteresado,setNuevoInteresado] = useState(false);
   const login = () => {
     Swal.fire({
       title: "Iniciar sesion",
@@ -72,6 +73,15 @@ function ContextProvider(props) {
     });
   };
 
+  const nuevoInteresadoChange = () => {
+    if (nuevoInteresado) {
+      setNuevoInteresado(false);
+    }else {
+      setNuevoInteresado(true);
+    }
+  
+  };
+
   const logout = () => {
     setIsLoggedIn(false);
     document.getElementById("containerPerso").style.gridTemplateColumns =
@@ -79,7 +89,7 @@ function ContextProvider(props) {
   };
 
   return (
-    <AContext.Provider value={{ isLoggedIn, login, logout,token}}>
+    <AContext.Provider value={{ isLoggedIn, login, logout,token,nuevoInteresado,nuevoInteresadoChange}}>
       {props.children}
     </AContext.Provider>
   );
